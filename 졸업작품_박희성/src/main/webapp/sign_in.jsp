@@ -13,7 +13,8 @@
 <div class="box">
     <p class="title">회원가입</p>
     <p class="warning">졸업작품 체험이 끝나면 데이터베이스를 지울 것이며 혹시모르니 평소에 쓰지 않는 아이디와 비밀번호를 사용해주세요</p>
-    <form action="" name="sign_in">
+    
+    <form method="post" action="sign_in_action.jsp" name="sign_in">
         <div class="insert_zone">
             <p class="insert_tag">이름</p>
             <input type="text" name="name" placeholder="이름을 입력해주세요" class="insert_input">
@@ -30,6 +31,7 @@
         	<input type="button" class="button" id="joins" value="가입하기" onclick="join()">
         </div>
     </form>
+    
 </div>
 
 </body>

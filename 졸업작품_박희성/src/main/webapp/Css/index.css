@@ -62,3 +62,8 @@ li{
     font-weight:bold;
     border-radius: 15px;
 }
+.join{
+	text-align: right;
+	margin-top: 5px;
+	font-size: 18px;
+}

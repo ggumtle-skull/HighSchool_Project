@@ -25,12 +25,14 @@
     </div>
     
     <div class="side_menu">
-        <div class="sign_in">
-            <input type="text" name="id" placeholder="아이디" id="id">
-            <input type="password" name="pw" placeholder="비밀번호" id="pw">
-            <input type="button" class="login" value="로그인">
-            <p class="join" onclick="go_sign_in()">회원가입</p>
-        </div>
+        <form name="login_form" method="post" action="login_action.jsp">
+            <div class="sign_in">
+                <input type="text" name="id" placeholder="아이디" id="id">
+                <input type="password" name="pw" placeholder="비밀번호" id="pw">
+                <input type="button" class="login" value="로그인" onclick="login()">
+                <p class="join" onclick="go_sign_in()">회원가입</p>
+            </div>
+        </form>
     </div>
 </div>
 

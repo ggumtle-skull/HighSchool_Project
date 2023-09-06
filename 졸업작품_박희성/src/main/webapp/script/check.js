@@ -29,12 +29,23 @@ function join(){
         return false;
     }
     else{
-        alert("가입이 완료되었습니다");
-        window.location = "index.jsp";
-        return false;
+        document.sign_in.submit();
+        //window.location = "index.jsp";
+        return true;
     }
 }
 
 function go_sign_in(){
     window.location = "sign_in.jsp";
+}
+
+function login(){
+    if(login_form.id.value.length == 0 || login_form.pw.value.length == 0){
+        alert("아이디/비밀번호를 입력하시오");
+        return false;
+    }
+    else{
+        document.login_form.submit();
+        return true;
+    }
 }
