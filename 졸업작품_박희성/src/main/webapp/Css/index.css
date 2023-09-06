@@ -7,10 +7,9 @@
 li{
     list-style: none;
 }
-
 .main{
     width: 1200px;
-    height: 800px;
+    height: 100%;
     margin: 0 auto;
     border-left: 3px solid black;
     border-right: 3px solid black;
@@ -23,14 +22,118 @@ li{
     margin: 20px;
     border-radius: 20px;
 }
+.notice_search{
+	width: 160px;
+	height: 40px;
+	float: left;
+	margin-left: 20px;
+	margin-top: 10px;
+	margin-right:20px;
+	display: flex;
+}
+.notice_search_name{
+	height: 36px;
+	width: 91px;
+	margin-right: 5px;
+	text-align: center;
+}
+.notice_search_button{
+	width: 60px;
+	height: 40px;
+	float: right;
+	font-size: 18px;
+	font-weight: bold;
+}
 .notice_title{
-    width: 820px;
+    width: 420px;
     height: 50px;
     line-height: 50px;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
+    float: left;
+    margin-top: 5px;
 }
+.notice_insert{
+	width: 150px;
+	height: 40px;
+	margin: 10px 20px;
+	float: right;
+	font-size: 20px;
+	font-weight: bold;
+}
+.notice{
+	display: flex;
+	align-items: center;
+	width: 780px;
+	height: 310px;
+	margin: 10px 20px 20px 20px;
+	border-collapse: separate;
+	border-spacing: 10px;
+	position: relative;
+	overflow: auto;
+	
+}
+.notice > tr{
+	width: 770px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 18px;
+	margin:5px;
+}
+.notice_writer_title{
+	text-align: center;
+	width: 100px;
+	height: 40px;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 0 5px;
+	border: none;
+}
+.notice_name_title{
+	text-align: center;
+	width: 500px;
+	height: 40px;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 0 5px;
+	border: none;
+}
+.notice_time_title{
+	text-align: center;
+	width: 100px;
+	height: 40px;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 0 5px;
+	border: none;
+}
+.notice_writer{
+	padding: 0 5px;
+	text-align: center;
+	height: 30px;
+	overflow: hidden;
+	font-size: 18px;
+}
+.notice_name{
+	padding: 0 10px;
+	height: 20px;
+	overflow: hidden;
+	font-size: 18px;
+}
+.notice_time{
+	padding: 0 5px;
+	text-align: center;
+	height: 20px;
+	overflow: hidden;
+	font-size: 18px;
+}
+
+
+
+
+
+
 .side_menu{
     margin: 20px;
 	width: 300px;
