@@ -1,0 +1,7 @@
+create table sign_in(
+	name varchar2(100) not null,
+	id varchar2(100) primary key,
+	password varchar2(100) not null
+);
+
+insert into sign_in values('테스트','system','1234');

@@ -1,0 +1,61 @@
+@charset "UTF-8";
+
+*{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+
+.box{
+    width: 600px;
+    margin: 100px auto;
+    border: 3px solid rgb(100,100,100);
+    border-radius: 15px;
+}
+
+.title{
+    font-size: 30px;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    margin: 10px 0;
+}
+.warning{
+    padding: 0 15px 10px 15px;
+}
+
+.insert_zone{
+    padding-left: 15px;
+}
+.insert_tag{
+    font-size: 25px;
+}
+.insert_input{
+    width: 550px;
+    height: 35px;
+    font-size: 20px;
+    padding: 5px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.button{
+    height: 40px;
+    margin-left: 15px;
+    margin-bottom: 10px;
+    font-size: 25px;
+    width: 277.5px;
+    border-radius: 10px;
+}
+#reWrites{
+    margin-left: 0;
+    margin-right: 15px;
+    float: right;
+}
+#joins{
+	width: 570px;
+	margin-bottom: 29px;
+}
