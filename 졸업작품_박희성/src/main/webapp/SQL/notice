@@ -1,0 +1,7 @@
+create table notice(
+	writer varchar2(500),
+	contents varchar2(500),
+	write_date varchar2(100)
+);
+
+insert into notice values('test','over dos','3시 25분');
