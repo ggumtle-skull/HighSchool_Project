@@ -49,3 +49,26 @@ function login(){
         return true;
     }
 }
+
+//게시판
+function search(){
+	if(notice_form.notice_name.value.length != 0){
+		notice_form.action = "notice_search.jsp";
+		document.notice_form.submit();
+		return true;	
+	}
+	else{
+		alert("검색창에 제목을 입력해주세요");
+		return false;	
+	}
+}
+function insert(){
+	alert("로그인이 되어 있지 않습니다.");
+	return false;
+}
+function insert_login(){
+	notice_form.action = "notice_insert.jsp";
+	alert('<%=login %>');
+	document.notice_form.submit();
+	return true;
+}

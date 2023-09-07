@@ -5,3 +5,13 @@ create table notice(
 );
 
 insert into notice values('test','over dos','3시 25분');
+
+create table notice(
+	writer varchar2(500),
+	title varchar2(500),
+	contents varchar2(500),
+	write_date varchar2(100),
+	insert_time timestamp
+);
+
+insert into notice values('test','YEE','abcdesc','10시 19분', systimestamp);

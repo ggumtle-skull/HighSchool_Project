@@ -9,8 +9,8 @@ li{
 }
 .main{
     width: 1200px;
-    height: 100%;
-    margin: 0 auto;
+    height: 800px;
+    margin: 0 auto;	
     border-left: 3px solid black;
     border-right: 3px solid black;
 }
@@ -28,7 +28,7 @@ li{
 	float: left;
 	margin-left: 20px;
 	margin-top: 10px;
-	margin-right:40px;
+	margin-right : 20px;
 	display: flex;
 }
 .notice_search_name{
@@ -66,7 +66,7 @@ li{
 	display: flex;
 	align-items: center;
 	width: 780px;
-	height: 310px;
+	height: 270px;
 	margin: 10px 20px 20px 20px;
 	border-collapse: separate;
 	border-spacing: 10px;
@@ -81,6 +81,19 @@ li{
 	font-size: 18px;
 	margin:5px;
 }
+.notice_titles{
+	width: 780px;
+	height: 40px;
+	margin: 0 20px;
+	float: left;
+	position:relative;
+	align-content: space-between;
+}
+.notice_titles > span{
+	float: left;
+	line-height: 40px;
+}
+
 .notice_writer_title{
 	text-align: center;
 	width: 100px;
@@ -89,6 +102,7 @@ li{
 	font-weight: bold;
 	padding: 0 5px;
 	border: none;
+	margin: 0 10px;
 }
 .notice_name_title{
 	text-align: center;
@@ -98,6 +112,7 @@ li{
 	font-weight: bold;
 	padding: 0 5px;
 	border: none;
+	margin: 0 10px;
 }
 .notice_time_title{
 	text-align: center;
@@ -108,7 +123,10 @@ li{
 	padding: 0 5px;
 	border: none;
 }
+
 .notice_writer{
+	width: 100px;
+	height: 40px;
 	padding: 0 5px;
 	text-align: center;
 	height: 30px;
@@ -120,8 +138,12 @@ li{
 	height: 20px;
 	overflow: hidden;
 	font-size: 18px;
+	width: 500px;
+	height: 40px;
 }
 .notice_time{
+	width: 100px;
+	height: 40px;
 	padding: 0 5px;
 	text-align: center;
 	height: 20px;

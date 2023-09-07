@@ -12,8 +12,20 @@
 </head>
 <body>
 <jsp:include page="Section/header.jsp"></jsp:include>
-
+<%
+	request.setCharacterEncoding("UTF-8");
+	String login = request.getParameter("rs");
+	
+	try{
+		Connection con = Util.getConnection();
+		String sql = "select * from notice order by insert_time desc";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		
+		ResultSet rs = pstmt.executeQuery();
+	
+%>
 <div class="main">
+	<form name="notice_form" method="post">
     <div class="notice_board">
     	<div class="notice_search">
     		<input type="text" placeholder="제목 검색" name="notice_name" class="notice_search_name">
@@ -22,34 +34,26 @@
         <p class="notice_title">게시판</p>
         <input type="button" class="notice_insert" onclick="insert()" value="글쓰기">
     	
-<%
-	try{
-		Connection con = Util.getConnection();
-		String sql = "select * from notice";
-		PreparedStatement pstmt = con.prepareStatement(sql);
-		
-		ResultSet rs = pstmt.executeQuery();
-	
-%>
-        <form action="" name="notice_form" method="post">
+
+        <div class="notice_titles">
+        <span class="notice_writer_title">글쓴이</span>
+        <span class="notice_name_title">제목</span>
+        <span class="notice_time_title">시간</span>
+        </div>
         	<table class="notice" border="1">
-            	<tr>
-                	<td class="notice_writer_title">글쓴이</td>
-                	<td class="notice_name_title">제목</td>
-                	<td class="notice_time_title">시간</td>
-            	</tr>
             	<%
             	while(rs.next()){
             		%>
             		<tr>
                 		<td class="notice_writer"><%=rs.getString(1) %></td>
                 		<td class="notice_name"><%=rs.getString(2) %></td>
-                		<td class="notice_time"><%=rs.getString(3) %></td>
+                		<td class="notice_time"><%=rs.getString(4) %></td>
             		</tr>
             		<%
             	}
             	%>
         	</table>
+    	</div>
         </form>
         <%
 	}
@@ -57,7 +61,6 @@
     		e.printStackTrace();
     	}
 		%>
-    </div>
     
     <div class="side_menu">
         <form name="login_form" method="post" action="login_action.jsp">
