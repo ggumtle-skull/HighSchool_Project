@@ -11,7 +11,7 @@
 <body>
     <header>
         <div class="logo">
-            <a href="#" onclick="home()">
+            <a href="index.jsp">
                 <img src="Image/logo.png" alt="">
             </a>
         </div>

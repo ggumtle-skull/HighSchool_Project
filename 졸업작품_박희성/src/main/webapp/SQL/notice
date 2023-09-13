@@ -1,13 +1,5 @@
 create table notice(
 	writer varchar2(500),
-	contents varchar2(500),
-	write_date varchar2(100)
-);
-
-insert into notice values('test','over dos','3시 25분');
-
-create table notice(
-	writer varchar2(500),
 	title varchar2(500),
 	contents varchar2(500),
 	write_date varchar2(100),
@@ -15,3 +7,17 @@ create table notice(
 );
 
 insert into notice values('test','YEE','abcdesc','10시 19분', systimestamp);
+
+
+
+
+
+            	<tr>
+                	<td class="notice_writer_title">글쓴이</td>
+                	<td class="notice_name_title">제목</td>
+                	<td class="notice_time_title">시간</td>
+            	</tr>
+            	
+            	
+            	
+            	

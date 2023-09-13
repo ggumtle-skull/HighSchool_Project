@@ -62,13 +62,25 @@ function search(){
 		return false;	
 	}
 }
-function insert(){
-	alert("로그인이 되어 있지 않습니다.");
-	return false;
-}
 function insert_login(){
-	notice_form.action = "notice_insert.jsp";
-	alert('<%=login %>');
+	if(frm.title.value.length ==0){
+		alert("제목이 작성되지 않았습니다.");
+		frm.title.focus();
+		return false;
+	}
+	else if(frm.contents.value.length ==0){
+		alert("내용이 작성되지 않았습니다.");
+		frm.contents.focus();
+		return false;
+	}
+	else{
+		alert("개시글이 작성되었습니다.");
+		document.frm.submit();
+		return true;
+	}
+}
+function insert(){
+	notice_form.action = "insert.jsp";
 	document.notice_form.submit();
 	return true;
 }

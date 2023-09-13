@@ -14,8 +14,7 @@
 <jsp:include page="Section/header.jsp"></jsp:include>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String login = request.getParameter("rs");
-	
+	String id = request.getParameter("id");	
 	try{
 		Connection con = Util.getConnection();
 		String sql = "select * from notice order by insert_time desc";
@@ -72,6 +71,10 @@
             </div>
         </form>
     </div>
+    
+	<div class="notice_post">
+		
+	</div>
 </div>
 
 
