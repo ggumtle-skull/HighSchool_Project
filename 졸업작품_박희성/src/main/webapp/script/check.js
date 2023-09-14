@@ -45,6 +45,7 @@ function login(){
         return false;
     }
     else{
+		login_form.action = "login_action.jsp";
         document.login_form.submit();
         return true;
     }

@@ -14,7 +14,6 @@
 <%
 request.setCharacterEncoding("UTF-8");
 String id = request.getParameter("id");
-String name = "";
 
 try{
 	Connection con = Util.getConnection();
@@ -23,9 +22,6 @@ try{
 	pstmt.setString(1, id);
 	
 	ResultSet rs = pstmt.executeQuery();
-	if(rs.next()){
-		name=rs.getString(1);
-	}
 }
 catch(Exception e){
 	e.printStackTrace();
@@ -37,6 +33,7 @@ catch(Exception e){
 	<jsp:include page="Section/header.jsp"></jsp:include>
 	
 	<form action="notice_insert.jsp" name="frm" method="post" style="display: flex; justify-content: center; align-items: center;">
+	<input type="text" name="id" value="<%=id %>" style="display: none;">
 	<div class="main">
 		<div class="insert_area">
 			<div class="title">
