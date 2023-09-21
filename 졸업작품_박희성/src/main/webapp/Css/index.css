@@ -131,6 +131,9 @@ li{
 	height: 30px;
 	overflow: hidden;
 	font-size: 18px;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	max-width: 100px;
 }
 .notice_name{
 	padding: 0 10px;
@@ -139,6 +142,9 @@ li{
 	font-size: 18px;
 	width: 500px;
 	height: 40px;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	max-width: 500px;
 }
 .notice_time{
 	width: 100px;

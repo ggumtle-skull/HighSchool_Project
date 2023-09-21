@@ -85,3 +85,7 @@ function insert(){
 	document.notice_form.submit();
 	return true;
 }
+function insert_not(){
+	alert("게시글을 입력하려면 로그인을 하세요");
+	return false;
+}

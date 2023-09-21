@@ -1,3 +1,4 @@
+<%@page import="org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation"%>
 <%@page import="java.sql.*"%>
 <%@page import="DBPKG.Util"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -17,6 +18,8 @@
 	String id = request.getParameter("id");	
 	String search = request.getParameter("search");
 	String title = request.getParameter("title");
+	Integer notice_number = 0;
+	
 	try{
 		Connection con = Util.getConnection();
 		String sql="select * from notice order by insert_time desc";
@@ -28,8 +31,29 @@
 			pstmt.setString(1, "%"+title+"%");
 		}
 		ResultSet rs = pstmt.executeQuery();
-		System.out.print(title);
-		System.out.print(search);
+		
+
+		if(id == null){
+			id = "";
+		}
+		String user_info = "select s.name, s.id"
+						+" from sign_in s"
+						+" where s.id = ?";
+		PreparedStatement pstmt2 = con.prepareStatement(user_info);
+		pstmt2.setString(1, id);
+		ResultSet rs2 = pstmt2.executeQuery();	
+		
+		String number = "select * from notice where id = ?";
+		PreparedStatement pstmt3 = con.prepareStatement(number);
+		pstmt3.setString(1, id);
+		ResultSet rs3 = pstmt3.executeQuery();
+		String notice_plus = "";
+		while(rs3.next()){
+			notice_number++;
+			if(notice_number > 99){
+				notice_plus = "99+";
+			}
+		}
 		
 %>
 <div class="main">
@@ -41,7 +65,18 @@
     		<input type="button" onclick="search()" name="notice_search_button" value="검색" class="notice_search_button">
     	</div>
         <p class="notice_title">게시판</p>
-        <input type="button" class="notice_insert" onclick="insert()" value="글쓰기">
+        <%
+        if(id.length() == 0){
+        	%>
+        		<input type="button" class="notice_insert" onclick="insert_not()" value="글쓰기">
+        	<%
+        }
+        else{
+        	%>
+    			<input type="button" class="notice_insert" onclick="insert()" value="글쓰기">
+    		<%
+        }
+        %>
     	
 
         <div class="notice_titles">
@@ -64,20 +99,44 @@
         	</table>
     	</div>
         </form>
-        <%
-	}
-    	catch(Exception e){
-    		e.printStackTrace();
-    	}
-		%>
+
     
     <div class="side_menu">
         <form name="login_form" method="post" action="login_action.jsp">
             <div class="sign_in">
-                <input type="text" name="id" placeholder="아이디" value="<%=id %>" id="id">
-                <input type="password" name="pw" placeholder="비밀번호" id="pw">
-                <input type="button" class="login" value="로그인" onclick="login()">
-                <p class="join" onclick="go_sign_in()">회원가입</p>
+                <%
+                if(id.length() == 0){
+                	%>
+                	<input type="text" name="id" placeholder="아이디" value="<%=id %>" id="id">
+                	<input type="password" name="pw" placeholder="비밀번호" id="pw">
+                	<input type="button" class="login" value="로그인" onclick="login()">
+                	<p class="join" onclick="go_sign_in()">회원가입</p>
+                	<%
+                }
+                else{
+                	if(rs2.next()){
+                	%>
+                	<div class="user_info">
+                		<p>닉네임 : <%=rs2.getString(1) %></p>
+                		<p>아이디 : <%=rs2.getString(2) %></p>
+                		<%
+                		if(notice_number > 99){
+                			%>
+                			<p>올린 글 수 : <%=notice_plus %></p>
+                			<%
+                		}
+                		else{
+                			%>
+                			<p>올린 글 수 : <%=notice_number %></p>
+                			<%
+                		}
+                		%>
+                	</div>
+                	<p class="join" onclick="home()">로그아웃</p>
+                	<%
+                	}
+                }
+                %>
             </div>
         </form>
     </div>
@@ -87,6 +146,11 @@
 	</div>
 </div>
 
-
+        <%
+	}
+    	catch(Exception e){
+    		e.printStackTrace();
+    	}
+		%>
 </body>
 </html>

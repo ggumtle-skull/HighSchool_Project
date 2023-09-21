@@ -12,11 +12,11 @@
     <header>
         <div class="logo">
             <a href="index.jsp">
-                <img src="Image/logo.png" alt="">
+                <img src="Image/logo.png">
             </a>
         </div>
         
-        <div class="header_title"><span>졸업 작품</span></div>
+        <div class="header_title"><span><a href="index.jsp">졸업 작품</a></span></div>
 
         <ul class="creator">
             <li class="creator_name">제작자 : 박희성</li>
