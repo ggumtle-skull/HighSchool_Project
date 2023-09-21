@@ -22,7 +22,7 @@
 	
 	try{
 		Connection con = Util.getConnection();
-		String sql="select * from notice order by insert_time desc";
+		String sql="select a.* , rownum from(select * from notice order by insert_time desc) a";
 		if(search == "1"){	
 			sql = "select * from notice where title like ? order by insert_time desc";
 		}
@@ -80,6 +80,7 @@
     	
 
         <div class="notice_titles">
+        <span class="notice_no_title">NO.</span>
         <span class="notice_writer_title">글쓴이</span>
         <span class="notice_name_title">제목</span>
         <span class="notice_time_title">시간</span>
@@ -89,6 +90,7 @@
             	while(rs.next()){
             		%>
             		<tr>
+            			<td class="notice_no"><%=rs.getString(7) %></td>
                 		<td class="notice_writer"><%=rs.getString(1) %></td>
                 		<td class="notice_name"><%=rs.getString(2) %></td>
                 		<td class="notice_time"><%=rs.getString(4) %></td>

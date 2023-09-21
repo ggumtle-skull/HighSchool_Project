@@ -93,6 +93,16 @@ li{
 	line-height: 40px;
 }
 
+.notice_no_title{
+	text-align: center;
+	width: 70px;
+	height: 40px;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 0 5px;
+	border: none;
+	margin: 0 10px;
+}
 .notice_writer_title{
 	text-align: center;
 	width: 100px;
@@ -101,11 +111,11 @@ li{
 	font-weight: bold;
 	padding: 0 5px;
 	border: none;
-	margin: 0 10px;
+	margin: 0 5	px;
 }
 .notice_name_title{
 	text-align: center;
-	width: 500px;
+	width: 415px;
 	height: 40px;
 	font-size: 20px;
 	font-weight: bold;
@@ -123,6 +133,18 @@ li{
 	border: none;
 }
 
+.notice_no{
+	width: 70px;
+	height: 40px;
+	padding: 0 5px;
+	text-align: center;
+	height: 30px;
+	overflow: hidden;
+	font-size: 18px;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	max-width: 70px;
+}
 .notice_writer{
 	width: 100px;
 	height: 40px;
@@ -140,11 +162,11 @@ li{
 	height: 20px;
 	overflow: hidden;
 	font-size: 18px;
-	width: 500px;
+	width: 410px;
 	height: 40px;
 	text-overflow:ellipsis;
 	white-space: nowrap;
-	max-width: 500px;
+	max-width: 410px;
 }
 .notice_time{
 	width: 100px;
