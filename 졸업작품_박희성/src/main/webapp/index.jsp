@@ -57,6 +57,9 @@
 		rs = pstmt.executeQuery();
 		if(cPage > totalPage){
 			cPage = 1;
+			printFirst = (cPage - 1)*5 + 1;
+			printLast = printFirst + perForPage -1 ;
+			pageList = (cPage-1) / 10 + 1;
 		}
 
 		if(id == null){
@@ -132,7 +135,10 @@
     		<input type="button" value="< 이전" class="page_BN" onclick="page_before()"><div style="margin-left: 10px; margin-right: 10px;">
     		<% Integer num2 = (pageList-1)*10 + 1;
     			while(num2 <= pageList*10 && num2 <= totalPage){%>
-    			<input type="button" value="<%=num2 %>" onclick="pageNum(this.value)" class="page_button">
+    			<input type="button" value="<%=num2 %>" onclick="pageNum(this.value)" class="page_button"
+    			<% if(num2 == cPage) {%>
+    			style="background: gray; color: white;"
+    			<%} %>>
     		<%	num2++;
     			}%>
     		</div>
@@ -195,9 +201,11 @@ function search() {
 	notice_form.action = "index.jsp";
 	if (value.length == 0) {
 		alert("검색어를 입력하세요.");
+		notice_form.page.value = 1;
 		notice_form.submit();
 	} else {
 		alert("검색 완료");
+		notice_form.page.value = 1;
 		notice_form.submit();
 	}
 }
