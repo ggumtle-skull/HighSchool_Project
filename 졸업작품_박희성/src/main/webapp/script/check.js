@@ -52,7 +52,7 @@ function login(){
 }
 
 //게시판
-function search(){
+/*function search(){
 	if(notice_form.notice_name.value.length != 0){
 		notice_form.action = "notice_search.jsp";
 		document.notice_form.submit();
@@ -62,7 +62,7 @@ function search(){
 		alert("검색창에 제목을 입력해주세요");
 		return false;	
 	}
-}
+}*/
 function insert_login(){
 	if(frm.title.value.length ==0){
 		alert("제목이 작성되지 않았습니다.");
@@ -89,3 +89,4 @@ function insert_not(){
 	alert("게시글을 입력하려면 로그인을 하세요");
 	return false;
 }
+

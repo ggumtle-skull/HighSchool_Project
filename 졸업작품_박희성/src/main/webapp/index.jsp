@@ -11,27 +11,53 @@
 <link rel="stylesheet" href="Css/index.css">
 <script src="script/check.js"></script>
 </head>
+
 <body>
 <jsp:include page="Section/header.jsp"></jsp:include>
 <%
 	request.setCharacterEncoding("UTF-8");
-	String id = request.getParameter("id");	
-	String search = request.getParameter("search");
-	String title = request.getParameter("title");
+	String id = request.getParameter("id");
+	String title = request.getParameter("notice_name");
 	Integer notice_number = 0;
+	
+	String tempPage = request.getParameter("page");
+	Integer cPage;
+	Integer perForPage = 5;
+	if (tempPage == null || tempPage.length() == 0 || tempPage == "0") {
+	    cPage = 1;
+	}
+	try {
+	    cPage = Integer.parseInt(tempPage);
+	} catch (NumberFormatException e) {
+	    cPage = 1;
+	}
+	Integer printFirst = (cPage - 1)*5 + 1;
+	Integer printLast = printFirst + perForPage -1 ;
+	Integer totalList = 0;
+	Integer totalPage = 0;
+	Integer pageList = (cPage-1) / 10 + 1;
 	
 	try{
 		Connection con = Util.getConnection();
 		String sql="select a.* , rownum from(select * from notice order by insert_time desc) a";
-		if(search == "1"){	
-			sql = "select * from notice where title like ? order by insert_time desc";
-		}
+		if(title != null)
+			sql = sql+" WHERE a.title LIKE ?";
 		PreparedStatement pstmt = con.prepareStatement(sql);
-		if(search=="1"){
-			pstmt.setString(1, "%"+title+"%");
+		if(title != null)
+			pstmt.setString(1, "%" + title + "%");
+		else{
+			title="";
 		}
 		ResultSet rs = pstmt.executeQuery();
 		
+		while(rs.next())
+			totalList += 1;
+		totalPage = totalList / perForPage;
+		if(totalList % perForPage != 0) totalPage++;
+		rs = pstmt.executeQuery();
+		if(cPage > totalPage){
+			cPage = 1;
+		}
 
 		if(id == null){
 			id = "";
@@ -50,18 +76,17 @@
 		String notice_plus = "";
 		while(rs3.next()){
 			notice_number++;
-			if(notice_number > 99){
+			if(notice_number > 99)
 				notice_plus = "99+";
-			}
 		}
 		
-%>
+       %>
 <div class="main">
 	<form name="notice_form" method="post">
 	<input type="text" name="id" value="<%=id %>" style="display: none;">
     <div class="notice_board">
     	<div class="notice_search">
-    		<input type="text" placeholder="제목 검색" name="notice_name" class="notice_search_name">
+    		<input type="text" value="<%=title %>" placeholder="제목 검색" name="notice_name" class="notice_search_name">
     		<input type="button" onclick="search()" name="notice_search_button" value="검색" class="notice_search_button">
     	</div>
         <p class="notice_title">게시판</p>
@@ -85,9 +110,11 @@
         <span class="notice_name_title">제목</span>
         <span class="notice_time_title">시간</span>
         </div>
-        	<table class="notice" border="1">
+        	<table class="notice" border="2">
             	<%
             	while(rs.next()){
+            		Integer num = Integer.parseInt(rs.getString(7));
+            		if(printFirst <= num && printLast >= num){
             		%>
             		<tr>
             			<td class="notice_no"><%=rs.getString(7) %></td>
@@ -95,12 +122,24 @@
                 		<td class="notice_name"><%=rs.getString(2) %></td>
                 		<td class="notice_time"><%=rs.getString(4) %></td>
             		</tr>
-            		<%
+            		<%}
+            		else if(num > printLast) break;
             	}
             	%>
         	</table>
+        <div class="notice_page">
+    		<input name="page" value="<%=cPage %>" style="display: none;" type="text">
+    		<input type="button" value="< 이전" class="page_BN" onclick="page_before()"><div style="margin-left: 10px; margin-right: 10px;">
+    		<% Integer num2 = (pageList-1)*10 + 1;
+    			while(num2 <= pageList*10 && num2 <= totalPage){%>
+    			<input type="button" value="<%=num2 %>" onclick="pageNum(this.value)" class="page_button">
+    		<%	num2++;
+    			}%>
+    		</div>
+    		<input type="button" value="다음 >" class="page_BN" onclick="page_next()">
     	</div>
-        </form>
+    	</div>
+	</form>
 
     
     <div class="side_menu">
@@ -148,11 +187,45 @@
 	</div>
 </div>
 
+
+</body>
+<script type="text/javascript">
+function search() {
+	let value = notice_form.notice_name.value;
+	notice_form.action = "index.jsp";
+	if (value.length == 0) {
+		alert("검색어를 입력하세요.");
+		notice_form.submit();
+	} else {
+		alert("검색 완료");
+		notice_form.submit();
+	}
+}
+function pageNum(page_num){	
+	notice_form.action = "index.jsp";
+	notice_form.page.value = page_num;
+	document.notice_form.submit();
+	return true;
+}
+function page_before(){
+	let num = parseInt(notice_form.page.value);
+	if(num == 1) return false;
+	notice_form.page.value = num -1;
+	notice_form.submit();
+	return true;
+}
+function page_next(){
+	let num = parseInt(notice_form.page.value);
+	if(num == <%=totalPage %>) return false;
+	notice_form.page.value = num +1;
+	notice_form.submit();
+	return true;
+}
+</script>
+</html>
         <%
 	}
     	catch(Exception e){
     		e.printStackTrace();
     	}
 		%>
-</body>
-</html>
