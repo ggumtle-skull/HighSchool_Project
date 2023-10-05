@@ -52,6 +52,9 @@ try{
 }
 catch(Exception e){
 	e.printStackTrace();
+	%>
+	<jsp:forward page="index.jsp"></jsp:forward>
+	<%
 }
 
 %>

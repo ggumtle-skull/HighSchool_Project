@@ -61,25 +61,7 @@ li{
 	font-size: 20px;
 	font-weight: bold;
 }
-.notice{
-	display: flex;
-	align-items: center;
-	width: 780px;
-	height: 270px;
-	margin: 10px 20px 10px 20px;
-	border-collapse: separate;
-	border-spacing: 10px;
-	position: relative;
-	overflow: auto;
-	
-}
-.notice > tr{
-	width: 770px;
-	height: 20px;
-	line-height: 20px;
-	font-size: 18px;
-	margin:5px;
-}
+
 .notice_titles{
 	width: 780px;
 	height: 40px;
@@ -92,7 +74,6 @@ li{
 	float: left;
 	line-height: 40px;
 }
-
 .notice_no_title{
 	text-align: center;
 	width: 70px;
@@ -100,7 +81,6 @@ li{
 	font-size: 20px;
 	font-weight: bold;
 	padding: 0 5px;
-	border: none;
 	margin: 0 10px;
 }
 .notice_writer_title{
@@ -110,7 +90,6 @@ li{
 	font-size: 20px;
 	font-weight: bold;
 	padding: 0 5px;
-	border: none;
 	margin: 0 5	px;
 }
 .notice_name_title{
@@ -120,7 +99,6 @@ li{
 	font-size: 20px;
 	font-weight: bold;
 	padding: 0 5px;
-	border: none;
 	margin: 0 10px;
 }
 .notice_time_title{
@@ -130,16 +108,45 @@ li{
 	font-size: 20px;
 	font-weight: bold;
 	padding: 0 5px;
-	border: none;
+	margin:0 5px;
 }
 
+
+
+.notice{
+	align-items: center;
+	width: 780px;
+	height: 270px;
+	margin: 10px 20px 10px 20px;
+	border-collapse: separate;
+	border-spacing: 10px;
+	position: relative;
+	overflow: auto;
+	border: 1px solid black;
+}
+.notice_list{
+	width: 780px;
+	height: 40px;
+	line-height: 20px;
+	font-size: 18px;
+	margin:6.8px 0;
+	float: left;
+}
+.notice_list:hover{
+	font-weight: bold;
+	color: white;
+}
+.notice_list > span{
+	border: 1px solid black;
+	float: left;
+	margin: 0 5px;
+	line-height: 40px;
+}
 .notice_no{
 	width: 70px;
 	height: 40px;
 	padding: 0 5px;
 	text-align: center;
-	height: 30px;
-	overflow: hidden;
 	font-size: 18px;
 	text-overflow:ellipsis;
 	white-space: nowrap;
@@ -150,8 +157,6 @@ li{
 	height: 40px;
 	padding: 0 5px;
 	text-align: center;
-	height: 30px;
-	overflow: hidden;
 	font-size: 18px;
 	text-overflow:ellipsis;
 	white-space: nowrap;
@@ -159,8 +164,6 @@ li{
 }
 .notice_name{
 	padding: 0 10px;
-	height: 20px;
-	overflow: hidden;
 	font-size: 18px;
 	width: 410px;
 	height: 40px;
@@ -173,13 +176,8 @@ li{
 	height: 40px;
 	padding: 0 5px;
 	text-align: center;
-	height: 20px;
 	overflow: hidden;
 	font-size: 18px;
-}
-.notice_list:hover{
-	font-weight: bold;
-	color: white;
 }
 
 .notice_page{

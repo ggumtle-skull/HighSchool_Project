@@ -1,14 +1,5 @@
 create table notice(
-	writer varchar2(500),
-	title varchar2(500),
-	contents varchar2(500),
-	write_date varchar2(100),
-	insert_time timestamp
-);
-
-insert into notice values('test','YEE','abcdesc','10시 19분', systimestamp);
-
-create table notice(
+	insert_number number primary key,
 	writer varchar2(500),
 	title varchar2(500),
 	contents varchar2(500),
@@ -19,10 +10,10 @@ create table notice(
 
 create table notice(
 	insert_number number primary key,
-	writer varchar2(500),
-	title varchar2(500),
-	contents varchar2(500),
-	write_date varchar2(100),
-	insert_time timestamp,
-	id varchar2(100)
+	writer varchar2(500) not null,
+	title varchar2(500) not null,
+	contents varchar2(500) not null,
+	write_date varchar2(100) not null,
+	insert_time timestamp not null,
+	id varchar2(100) not null
 ); 	

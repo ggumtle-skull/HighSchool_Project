@@ -1,3 +1,4 @@
+<%@page import="java.io.Console"%>
 <%@page import="org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation"%>
 <%@page import="java.sql.*"%>
 <%@page import="DBPKG.Util"%>
@@ -18,10 +19,11 @@
 	request.setCharacterEncoding("UTF-8");
 	String id = request.getParameter("id");
 	String title = request.getParameter("notice_name");
-	String insert_number = request.getParameter("notice_view_number");
+	String view_number = request.getParameter("notice_view_number");
 	Integer notice_number = 0;
-	if(insert_number == null) insert_number = "000";
-	System.out.println(insert_number);
+	if(view_number == null || view_number == "null")
+		view_number = "000";
+	System.out.println(view_number);
 	
 	String tempPage = request.getParameter("page");
 	Integer cPage;
@@ -90,7 +92,7 @@
 <div class="main">
 	<form name="notice_form" method="post">
 	<input type="text" name="id" value="<%=id %>" style="display: none;">
-	<input type="text" name="notice_view_number" value="<%=insert_number %>" style="display: none;">
+	<input type="text" name="notice_view_number" value="<%=view_number %>" style="display: none;">
     <div class="notice_board">
     	<div class="notice_search">
     		<input type="text" value="<%=title %>" placeholder="제목 검색" name="notice_name" class="notice_search_name">
@@ -117,23 +119,23 @@
         <span class="notice_name_title">제목</span>
         <span class="notice_time_title">시간</span>
         </div>
-        	<table class="notice" border="2">
-            	<%
-            	while(rs.next()){
-            		Integer num = Integer.parseInt(rs.getString(8));
-            		if(printFirst <= num && printLast >= num){
-            		%>
-            		<tr class="notice_list" onclick="notice_view(this.value)" value="<%=rs.getInt(1) %>">
-            			<td class="notice_no"><%=rs.getString(8) %></td>
-                		<td class="notice_writer"><%=rs.getString(2) %></td>
-                		<td class="notice_name"><%=rs.getString(3) %></td>
-                		<td class="notice_time"><%=rs.getString(5) %></td>
-            		</tr>
-            		<%}
-            		else if(num > printLast) break;
-            	}
-            	%>
-        	</table>
+        	<ul class="notice">
+        		<%
+        		while(rs.next()){
+        			Integer num = Integer.parseInt(rs.getString(8));
+        			if(printFirst <= num && printLast >= num){
+        			%>
+        			<li class="notice_list" onclick="notice_view(this.value)" value="<%=rs.getInt(1) %>">
+        				<span class="notice_no"><%=rs.getString(8) %></span>
+        				<span class="notice_writer"><%=rs.getString(2) %></span>
+        				<span class="notice_name"><%=rs.getString(3) %></span>
+        				<span class="notice_time"><%=rs.getString(5) %></span>
+        			</li>
+        			<%}
+        			else if(num > printLast) break;
+        		}
+        		%>
+        	</ul>
         <div class="notice_page">
     		<input name="page" value="<%=cPage %>" style="display: none;" type="text">
     		<input type="button" value="< 이전" class="page_BN" onclick="page_before()"><div style="margin-left: 10px; margin-right: 10px;">
@@ -192,9 +194,20 @@
         </form>
     </div>
     
-	<div class="notice_post">
-		
-	</div>
+	<%
+	
+	if(!view_number.equals("000")){
+		String notice_view = "select * from notice where insert_number = ?";
+		PreparedStatement pstmt_view = con.prepareStatement(notice_view);
+		pstmt_view.setString(1, view_number);
+		ResultSet rs_view = pstmt_view.executeQuery();
+		%>
+		<div class="notice_post">
+			
+		</div>
+		<%
+	}
+	%>
 </div>
 
 
@@ -222,6 +235,7 @@ function pageNum(page_num){
 function page_before(){
 	let num = parseInt(notice_form.page.value);
 	if(num == 1) return false;
+	notice_form.action = "index.jsp";
 	notice_form.page.value = num -1;
 	notice_form.submit();
 	return true;
@@ -229,6 +243,7 @@ function page_before(){
 function page_next(){
 	let num = parseInt(notice_form.page.value);
 	if(num == <%=totalPage %>) return false;
+	notice_form.action = "index.jsp";
 	notice_form.page.value = num +1;
 	notice_form.submit();
 	return true;
