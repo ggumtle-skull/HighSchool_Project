@@ -16,3 +16,13 @@ create table notice(
 	insert_time timestamp,
 	id varchar2(100)
 ); 	
+
+create table notice(
+	insert_number number primary key,
+	writer varchar2(500),
+	title varchar2(500),
+	contents varchar2(500),
+	write_date varchar2(100),
+	insert_time timestamp,
+	id varchar2(100)
+); 	

@@ -18,7 +18,10 @@
 	request.setCharacterEncoding("UTF-8");
 	String id = request.getParameter("id");
 	String title = request.getParameter("notice_name");
+	String insert_number = request.getParameter("notice_view_number");
 	Integer notice_number = 0;
+	if(insert_number == null) insert_number = "000";
+	System.out.println(insert_number);
 	
 	String tempPage = request.getParameter("page");
 	Integer cPage;
@@ -87,6 +90,7 @@
 <div class="main">
 	<form name="notice_form" method="post">
 	<input type="text" name="id" value="<%=id %>" style="display: none;">
+	<input type="text" name="notice_view_number" value="<%=insert_number %>" style="display: none;">
     <div class="notice_board">
     	<div class="notice_search">
     		<input type="text" value="<%=title %>" placeholder="제목 검색" name="notice_name" class="notice_search_name">
@@ -116,14 +120,14 @@
         	<table class="notice" border="2">
             	<%
             	while(rs.next()){
-            		Integer num = Integer.parseInt(rs.getString(7));
+            		Integer num = Integer.parseInt(rs.getString(8));
             		if(printFirst <= num && printLast >= num){
             		%>
-            		<tr>
-            			<td class="notice_no"><%=rs.getString(7) %></td>
-                		<td class="notice_writer"><%=rs.getString(1) %></td>
-                		<td class="notice_name"><%=rs.getString(2) %></td>
-                		<td class="notice_time"><%=rs.getString(4) %></td>
+            		<tr class="notice_list" onclick="notice_view(this.value)" value="<%=rs.getInt(1) %>">
+            			<td class="notice_no"><%=rs.getString(8) %></td>
+                		<td class="notice_writer"><%=rs.getString(2) %></td>
+                		<td class="notice_name"><%=rs.getString(3) %></td>
+                		<td class="notice_time"><%=rs.getString(5) %></td>
             		</tr>
             		<%}
             		else if(num > printLast) break;
@@ -229,6 +233,7 @@ function page_next(){
 	notice_form.submit();
 	return true;
 }
+
 </script>
 </html>
         <%

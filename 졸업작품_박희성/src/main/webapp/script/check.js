@@ -90,3 +90,10 @@ function insert_not(){
 	return false;
 }
 
+function notice_view(insert_num){
+	notice_form.notice_view_number.value = insert_num;
+	alert(insert_num);
+	notice_form.action = "index.jsp";
+	document.notice_form.submit();	
+	return true;
+}

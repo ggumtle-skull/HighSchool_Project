@@ -17,24 +17,33 @@ DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH시 mm분");
 String formatnow = now.format(formatter);
 try{
 	Connection con = Util.getConnection();
-	String sql = "insert into notice values(?,?,?,?,systimestamp,?)";
+	String sql = "insert into notice values(?,?,?,?,?,systimestamp,?)";
 	PreparedStatement pstmt = con.prepareStatement(sql);
 	String sql2 = "select name from sign_in where id = ?";
 	PreparedStatement pstmt2 = con.prepareStatement(sql2);
 	pstmt2.setString(1, id);
 	ResultSet rs = pstmt2.executeQuery();
 	
+	String insert_number = "select count(*) from notice";
+	PreparedStatement pstmt3 = con.prepareStatement(insert_number);
+	ResultSet rs2 = pstmt3.executeQuery();
+	int num=0;
+	while(rs2.next()){
+		num = rs2.getInt(1);
+	}
 	
+	
+	pstmt.setInt(1, num);
 	if(rs.next()){
-		pstmt.setString(1, rs.getString(1));
+		pstmt.setString(2, rs.getString(1));
 	}
 	else{
-		pstmt.setString(1, "nameless");
+		pstmt.setString(2, "nameless");
 	}
-	pstmt.setString(2, title);
-	pstmt.setString(3, contents);
-	pstmt.setString(4, formatnow);
-	pstmt.setString(5, id);
+	pstmt.setString(3, title);
+	pstmt.setString(4, contents);
+	pstmt.setString(5, formatnow);
+	pstmt.setString(6, id);
 	
 	pstmt.executeUpdate();
 	%>

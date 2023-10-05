@@ -177,6 +177,10 @@ li{
 	overflow: hidden;
 	font-size: 18px;
 }
+.notice_list:hover{
+	font-weight: bold;
+	color: white;
+}
 
 .notice_page{
 	width: 820px;
