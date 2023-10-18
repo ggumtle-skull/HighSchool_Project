@@ -239,6 +239,7 @@
 				if(check != 0){
 					%>
 					<input type="button" value="수정" onclick="notice_update()">
+					<input type="button" value="삭제" onclick="notice_delete()">
 					<%
 				}
 			%>

@@ -118,3 +118,8 @@ function notice_update_action(){
 		return true;
 	}
 }
+function notice_delete(){
+	notice_view_frm.action = "notice_delete.jsp";
+	document.notice_view_frm.submit();
+	return true;
+}
