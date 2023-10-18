@@ -23,7 +23,6 @@
 	Integer notice_number = 0;
 	if(view_number == null || view_number == "null")
 		view_number = "000";
-	System.out.println(view_number);
 	
 	String tempPage = request.getParameter("page");
 	Integer cPage;
@@ -70,12 +69,17 @@
 		if(id == null){
 			id = "";
 		}
-		String user_info = "select s.name, s.id"
+		String user_info = "select s.name, s.id, count(*)"
 						+" from sign_in s"
-						+" where s.id = ?";
+						+" where s.id = ?"
+						+" group by s.name, s.id";
 		PreparedStatement pstmt2 = con.prepareStatement(user_info);
 		pstmt2.setString(1, id);
 		ResultSet rs2 = pstmt2.executeQuery();	
+		boolean login_check = false;
+		if(rs2.next()){
+			login_check = true;
+		}
 		
 		String number = "select * from notice where id = ?";
 		PreparedStatement pstmt3 = con.prepareStatement(number);
@@ -158,7 +162,7 @@
         <form name="login_form" method="post" action="login_action.jsp">
             <div class="sign_in">
                 <%
-                if(id.length() == 0){
+                if(!login_check){
                 	%>
                 	<input type="text" name="id" placeholder="아이디" value="<%=id %>" id="id">
                 	<input type="password" name="pw" placeholder="비밀번호" id="pw">
@@ -167,8 +171,12 @@
                 	<%
                 }
                 else{
+                	pstmt2 = con.prepareStatement(user_info);
+            		pstmt2.setString(1, id);
+            		rs2 = pstmt2.executeQuery();	
                 	if(rs2.next()){
                 	%>
+                	<input type="text" value="<%=id %>" name="id" style="display:none;">
                 	<div class="user_info">
                 		<p>닉네임 : <%=rs2.getString(1) %></p>
                 		<p>아이디 : <%=rs2.getString(2) %></p>
@@ -197,14 +205,45 @@
 	<%
 	
 	if(!view_number.equals("000")){
-		String notice_view = "select * from notice where insert_number = ?";
+		String notice_view = "select writer,id,title,contents,write_date,to_char(insert_time,'yyyy/mm/dd') from notice where insert_number = ?";
 		PreparedStatement pstmt_view = con.prepareStatement(notice_view);
 		pstmt_view.setString(1, view_number);
 		ResultSet rs_view = pstmt_view.executeQuery();
+		
+		String notice_view_check = "select count(*) from notice, sign_in where ? = notice.id and notice.insert_number = ?";
+		PreparedStatement check_pstmt = con.prepareStatement(notice_view_check);
+		check_pstmt.setString(1, id);
+		check_pstmt.setString(2, view_number);
+		ResultSet view_check = check_pstmt.executeQuery();
+		Integer check = 0;
+		if(view_check.next()){
+			check = view_check.getInt(1);
+			if(check == null) check=0;
+		}
 		%>
-		<div class="notice_post">
-			
-		</div>
+		<form action="" name="notice_view_frm" method="post">
+			<input type="text" value="<%=view_number %>" name="view_number" style="display: none;">
+			<input type="text" name="id" value="<%=id %>" style="display: none;">
+			<div class="notice_post">
+			<%
+				if(rs_view.next()){
+					%>
+					<p><%=rs_view.getString(1) %></p>
+					<p><%=rs_view.getString(2) %></p>
+					<p><%=rs_view.getString(3) %></p>
+					<p><%=rs_view.getString(4) %></p>
+					<p><%=rs_view.getString(5) %></p>
+					<p><%=rs_view.getString(6) %></p>
+					<%
+				}
+				if(check != 0){
+					%>
+					<input type="button" value="수정" onclick="notice_update()">
+					<%
+				}
+			%>
+			</div>
+		</form>
 		<%
 	}
 	%>

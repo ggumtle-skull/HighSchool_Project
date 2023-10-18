@@ -96,3 +96,25 @@ function notice_view(insert_num){
 	document.notice_form.submit();	
 	return true;
 }
+function notice_update(){
+	notice_view_frm.action = "notice_update.jsp";
+	document.notice_view_frm.submit();
+	return true;
+}
+function notice_update_action(){
+	if(frm.title.value.length ==0){
+		alert("제목이 작성되지 않았습니다.");
+		frm.title.focus();
+		return false;
+	}
+	else if(frm.contents.value.length ==0){
+		alert("내용이 작성되지 않았습니다.");
+		frm.contents.focus();
+		return false;
+	}
+	else{
+		alert("개시글이 수정되었습니다.");
+		document.frm.submit();
+		return true;
+	}
+}
