@@ -7,6 +7,9 @@
 li{
     list-style: none;
 }
+html{
+	background: #FFCA7F;
+}
 .main{
     width: 1200px;
     margin: 0 auto;
@@ -15,9 +18,10 @@ li{
 	float: left;
     width: 820px;
     height: 420px;
-    background: rgb(160,160,160);
-    margin: 20px;
+    background: #FF9500;
+    margin: 20px 16px 16px 20px;
     border-radius: 20px;
+    border: 2px solid black;
 }
 .notice_search{
 	width: 160px;
@@ -201,16 +205,17 @@ li{
 
 
 .side_menu{
-    margin: 20px;
+    margin: 20px 20px 16px 16px;
 	width: 300px;
 	height : 420px;
 	background: rgb(188,188,188);
     float: right;
     border-radius: 20px;
+    border: 2px solid black;
+    position: relative;
 }
 
 .sign_in{
-    position: relative;
     float: right;
     height: 90px;
     width: 270px;
@@ -235,16 +240,20 @@ li{
 	text-align: right;
 	margin-top: 5px;
 	font-size: 18px;
+	position: absolute;
+	bottom: 10px;
+	right: 20px;
 }
 
 .notice_post{
 	width: 1160px;
 	height: 600px;
-	background-color:lime;
-	margin: 20px;
+	background-color: #66F981;
+	margin: 16px 18px 20px 18px;
 	float: left;
 	border-radius: 20px;
 	position: relative;
+	border: 2px solid black;
 }
 .notice_view_title{
 	width: 100%;
@@ -285,7 +294,7 @@ li{
 	width: 100px;
 	height: 40px;
 	line-height: 40px;
-	background: red;
+	background: #FF001A;
 	color: white;
 	font-size: 20px;
 	margin-right: 10px;
@@ -295,6 +304,6 @@ li{
 	height: 40px;
 	line-height: 40px;
 	font-size: 20px;
-	background: skyblue;
+	background: rgb(214,230,245);
 	margin-right: 10px;
 }

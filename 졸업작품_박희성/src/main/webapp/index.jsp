@@ -160,6 +160,7 @@
     
     <div class="side_menu">
         <form name="login_form" method="post" action="login_action.jsp">
+        <input type="text" name="view_number" value="<%=view_number %>" style="display: none">
             <div class="sign_in">
                 <%
                 if(!login_check){
@@ -232,7 +233,7 @@
 			<ul class="notice_post">
 				<li class="notice_view_title">
 					<span class="notice_view_tag">제목</span>
-					<span><%=rs_view.getString(3) %></span>
+					<span style="padding:0 20px;"><%=rs_view.getString(3) %></span>
 				</li>
 				<li class="notice_view_sub">
 					<a href="#">

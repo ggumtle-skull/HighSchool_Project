@@ -24,7 +24,7 @@ try{
 	pstmt2.setString(1, id);
 	ResultSet rs = pstmt2.executeQuery();
 	
-	String insert_number = "select insert_number from notice";
+	String insert_number = "select insert_number from notice order by insert_number";
 	PreparedStatement pstmt3 = con.prepareStatement(insert_number);
 	ResultSet rs2 = pstmt3.executeQuery();
 	int num=0;

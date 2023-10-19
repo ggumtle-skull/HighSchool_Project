@@ -30,8 +30,6 @@
         	<input type="button" class="button" id="joins" value="가입하기" onclick="join()">
         </div>
     </form>
-    
 </div>
-
 </body>
 </html>

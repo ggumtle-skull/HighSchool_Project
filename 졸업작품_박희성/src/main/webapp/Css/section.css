@@ -13,7 +13,6 @@ a{
 }
 
 header{
-    background-color: skyblue;
     width:1200px;
     margin: 0 auto;
     height: 80px;
@@ -54,7 +53,6 @@ header > div{
     float: right;
     width: 170px;
     height: 80px;
-    background-color: lightgray;
 }
 .creator_name, .creator_class{
     display: flex;

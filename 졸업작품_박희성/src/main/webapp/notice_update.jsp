@@ -13,7 +13,6 @@
 request.setCharacterEncoding("UTF-8");
 String id = request.getParameter("id");
 String insert_number = request.getParameter("view_number");
-System.out.println(id);
 
 try{
 	Connection con = Util.getConnection();

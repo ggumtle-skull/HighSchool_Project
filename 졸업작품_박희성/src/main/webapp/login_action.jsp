@@ -8,6 +8,7 @@
 request.setCharacterEncoding("UTF-8");
 String id = request.getParameter("id");
 String pw = request.getParameter("pw");
+String view_number = request.getParameter("view_number");
 
 try{
 	Connection con = Util.getConnection();
@@ -20,7 +21,9 @@ try{
 	
 	if(rs.next()){
 		%>
-		<jsp:forward page="index.jsp"></jsp:forward>
+		<jsp:forward page="index.jsp">
+			<jsp:param value="<%=view_number %>" name="notice_view_number"/>
+		</jsp:forward>
 		<%
 	}
 	else{
