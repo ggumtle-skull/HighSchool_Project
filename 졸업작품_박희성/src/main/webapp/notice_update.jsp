@@ -7,8 +7,8 @@
 <head>
 <meta charset="UTF-8">
 <title>게시글 수정</title>
-<link rel="stylesheet" href="Css/index.css">
 <script src="script/check.js"></script>
+<link rel="stylesheet" href="Css/insert.css">
 <%
 request.setCharacterEncoding("UTF-8");
 String id = request.getParameter("id");

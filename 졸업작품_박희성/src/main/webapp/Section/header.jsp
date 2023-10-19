@@ -12,7 +12,7 @@
     <header>
         <div class="logo">
             <a href="index.jsp">
-                <img src="Image/logo.png">
+                <img src="Image/logo-removebg.png">
             </a>
         </div>
         

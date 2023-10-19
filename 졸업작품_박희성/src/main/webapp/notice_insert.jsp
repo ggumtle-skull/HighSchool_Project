@@ -24,13 +24,14 @@ try{
 	pstmt2.setString(1, id);
 	ResultSet rs = pstmt2.executeQuery();
 	
-	String insert_number = "select count(*) from notice";
+	String insert_number = "select insert_number from notice";
 	PreparedStatement pstmt3 = con.prepareStatement(insert_number);
 	ResultSet rs2 = pstmt3.executeQuery();
 	int num=0;
 	while(rs2.next()){
 		num = rs2.getInt(1);
 	}
+	num++;
 	
 	
 	pstmt.setInt(1, num);

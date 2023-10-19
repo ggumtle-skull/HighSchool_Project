@@ -11,8 +11,8 @@ create table notice(
 create table notice(
 	insert_number number primary key,
 	writer varchar2(500) not null,
-	title varchar2(500) not null,
-	contents varchar2(500) not null,
+	title varchar2(1000) not null,
+	contents varchar2(1000) not null,
 	write_date varchar2(100) not null,
 	insert_time timestamp not null,
 	id varchar2(100) not null

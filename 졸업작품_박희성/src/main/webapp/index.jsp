@@ -205,7 +205,7 @@
 	<%
 	
 	if(!view_number.equals("000")){
-		String notice_view = "select writer,id,title,contents,write_date,to_char(insert_time,'yyyy/mm/dd') from notice where insert_number = ?";
+		String notice_view = "select writer, id, title, contents, write_date, to_char(insert_time,'yyyymmdd'), to_char(insert_time, 'hh24mi') from notice where insert_number = ?";
 		PreparedStatement pstmt_view = con.prepareStatement(notice_view);
 		pstmt_view.setString(1, view_number);
 		ResultSet rs_view = pstmt_view.executeQuery();
@@ -220,32 +220,49 @@
 			check = view_check.getInt(1);
 			if(check == null) check=0;
 		}
+		if(rs_view.next()){	
+			String notice_view_date = rs_view.getString(6);
+			notice_view_date = notice_view_date.substring(0, 4) + "년 " + notice_view_date.substring(4,6) + "월 " + notice_view_date.substring(6,8) + "일";
+			String notice_view_time = rs_view.getString(7);
+			notice_view_time = notice_view_time.substring(0,2) + ":" + notice_view_time.substring(2,4);
 		%>
 		<form action="" name="notice_view_frm" method="post">
 			<input type="text" value="<%=view_number %>" name="view_number" style="display: none;">
 			<input type="text" name="id" value="<%=id %>" style="display: none;">
-			<div class="notice_post">
-			<%
-				if(rs_view.next()){
-					%>
-					<p><%=rs_view.getString(1) %></p>
-					<p><%=rs_view.getString(2) %></p>
-					<p><%=rs_view.getString(3) %></p>
-					<p><%=rs_view.getString(4) %></p>
-					<p><%=rs_view.getString(5) %></p>
-					<p><%=rs_view.getString(6) %></p>
-					<%
-				}
-				if(check != 0){
-					%>
-					<input type="button" value="수정" onclick="notice_update()">
-					<input type="button" value="삭제" onclick="notice_delete()">
-					<%
-				}
-			%>
-			</div>
+			<ul class="notice_post">
+				<li class="notice_view_title">
+					<span class="notice_view_tag">제목</span>
+					<span><%=rs_view.getString(3) %></span>
+				</li>
+				<li class="notice_view_sub">
+					<a href="#">
+						<span class="notice_view_tag">글쓴이</span>
+						<span style="margin-left: 20px;"><%=rs_view.getString(1) %></span>
+					</a>
+					<a href="#" style="float: right; margin-right: 10px;">
+						<span><%=notice_view_date %></span>
+						<span><%=notice_view_time %></span>
+					</a>
+				</li>
+				<li class="notice_view_contents">
+					<span class="notice_view_tag" style="height: 466px; line-height: 466px; margin-right: 20px;">내용</span>
+					<span><%=rs_view.getString(4) %></span>
+				</li>
+				<%
+					if(check != 0){
+				%>
+					<li class="notice_view_button">
+						<input type="button" value="삭제" onclick="notice_delete()" class="notice_delete">
+						<input type="button" value="수정" onclick="notice_update()" class="notice_update">
+					</li>
+				<%
+					}
+				%>
+			</ul>
+			
 		</form>
 		<%
+		}
 	}
 	%>
 </div>

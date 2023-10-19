@@ -9,7 +9,6 @@
 <title>회원가입</title>
 </head>
 <body>
-
 <div class="box">
     <p class="title">회원가입</p>
     <p class="warning">졸업작품 체험이 끝나면 데이터베이스를 지울 것이며 혹시모르니 평소에 쓰지 않는 아이디와 비밀번호를 사용해주세요</p>
