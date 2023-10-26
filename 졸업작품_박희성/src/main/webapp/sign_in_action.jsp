@@ -19,7 +19,9 @@ try{
 	
 	if(rs.next()){
 		%>
-		<jsp:forward page="sign_in.jsp"></jsp:forward>
+		<jsp:forward page="sign_in.jsp">
+			<jsp:param value="true" name="id_duplication"/>
+		</jsp:forward>
 		<%
 	}
 	else{

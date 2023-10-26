@@ -11,6 +11,7 @@ request.setCharacterEncoding("UTF-8");
 String title = request.getParameter("title");
 String contents = request.getParameter("contents");
 String id = request.getParameter("id");
+String pw = request.getParameter("pw");
 
 LocalTime now = LocalTime.now();
 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH시 mm분");
@@ -19,9 +20,10 @@ try{
 	Connection con = Util.getConnection();
 	String sql = "insert into notice values(?,?,?,?,?,systimestamp,?)";
 	PreparedStatement pstmt = con.prepareStatement(sql);
-	String sql2 = "select name from sign_in where id = ?";
+	String sql2 = "select name from sign_in where id = ? and password = ?";
 	PreparedStatement pstmt2 = con.prepareStatement(sql2);
 	pstmt2.setString(1, id);
+	pstmt2.setString(2, pw);
 	ResultSet rs = pstmt2.executeQuery();
 	
 	String insert_number = "select insert_number from notice order by insert_number";

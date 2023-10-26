@@ -1,20 +1,21 @@
 @charset "UTF-8";
-
 *{
     margin: 0;
     padding: 0;
-}html{
+}
+html{
 	background: rgb(240,240,240);
 }
-li{
-    list-style: none;
-}
-
 .box{
-    width: 400px;
-    margin: auto;
-    margin-top: 100px;
-    position: relative;
+	width: 300px;
+	margin: 0 auto;
+	margin-top: 150px;
+	position: relative;
+}
+form > p{
+	font-size: 20px;
+	color: red;
+	font-weight: bold;
 }
 #home_img{
 	width: 30px;
@@ -23,7 +24,6 @@ li{
 	right: 20px;
 	cursor: pointer;
 }
-
 .title{
     font-size: 30px;
     width: 100%;
@@ -32,63 +32,39 @@ li{
     text-align: center;
     margin: 10px 0;
 }
-.warning{
-    padding: 0 15px 10px 15px;
-    color: gray;
-}
-.warning:hover{
-	color:black;
-	font-weight: bold;
-}
-#duplication{
-	color: red;
-	font-size: 20px;
-	font-weight: bold;
-}
-
 .insert_input{
-    width: 390px;
+    width: 290px;
     height: 35px;
     font-size: 18px;
     padding: 5px;
     border: 1px solid gray;
 }
-#name{
-	border-radius: 5px;
-	margin-bottom: 15px;
-	margin-top: 15px;
-}
 #id{
+	margin-top: 15px;
 	border-top-left-radius: 5px;
 	border-top-right-radius: 5px;
-}
-#pw{
-	border-top: none;
 	border-bottom: none;
 }
-#rpw{
+#pw{
 	border-bottom-left-radius: 5px;
 	border-bottom-right-radius: 5px;
 	margin-bottom: 25px;
 }
-
-
 .button{
     height: 40px;
     font-size: 25px;
-    width: 400px;
+    width: 300px;
     background: #00A9FF;
     color: white;
     border: none;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 .button:hover{
 	background: #0C356A;
 }
-
-.login{
+.sign_in{
 	cursor: pointer;
 	float: right;
 	font-size: 18px;
-	margin-top: 10px;
 }

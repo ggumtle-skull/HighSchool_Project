@@ -2,6 +2,18 @@ function home(){
     window.location="index.jsp";
     return false;
 }
+function go_sign_in(){
+	window.location="sign_in.jsp";
+	return false;
+}
+function go_login(){
+	window.location="login.jsp";
+	return false;
+}
+function back(){
+	window.history.back();
+	return false;
+}
 
 function reWrite(){
     sign_in.reset();
@@ -40,29 +52,16 @@ function go_sign_in(){
 }
 
 function login(){
-    if(login_form.id.value.length == 0 || login_form.pw.value.length == 0){
+    if(frm.id.value.length == 0 || frm.pw.value.length == 0){
         alert("아이디/비밀번호를 입력하시오");
         return false;
     }
     else{
-		login_form.action = "login_action.jsp";
-        document.login_form.submit();
+        document.frm.submit();
         return true;
     }
 }
 
-//게시판
-/*function search(){
-	if(notice_form.notice_name.value.length != 0){
-		notice_form.action = "notice_search.jsp";
-		document.notice_form.submit();
-		return true;	
-	}
-	else{
-		alert("검색창에 제목을 입력해주세요");
-		return false;	
-	}
-}*/
 function insert_login(){
 	if(frm.title.value.length ==0){
 		alert("제목이 작성되지 않았습니다.");
@@ -92,13 +91,13 @@ function insert_not(){
 
 function notice_view(insert_num){
 	notice_form.notice_view_number.value = insert_num;
-	notice_form.action = "index.jsp";
+	notice_form.action = "notice_view.jsp";
 	document.notice_form.submit();	
 	return true;
 }
 function notice_update(){
-	notice_view_frm.action = "notice_update.jsp";
-	document.notice_view_frm.submit();
+	frm.action = "notice_update.jsp";
+	document.frm.submit();
 	return true;
 }
 function notice_update_action(){
@@ -119,7 +118,12 @@ function notice_update_action(){
 	}
 }
 function notice_delete(){
-	notice_view_frm.action = "notice_delete.jsp";
-	document.notice_view_frm.submit();
+	frm.action = "notice_delete.jsp";
+	document.frm.submit();
 	return true;
+}
+
+function search_writer(){
+	frm.action = "index.jsp";
+	document.frm.submit();
 }

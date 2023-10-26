@@ -18,11 +18,16 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String id = request.getParameter("id");
+	String pw = request.getParameter("pw");
 	String title = request.getParameter("notice_name");
+	String writer = request.getParameter("writer");
 	String view_number = request.getParameter("notice_view_number");
 	Integer notice_number = 0;
 	if(view_number == null || view_number == "null")
 		view_number = "000";
+	
+	System.out.println(title);
+	System.out.println(writer);
 	
 	String tempPage = request.getParameter("page");
 	Integer cPage;
@@ -43,12 +48,26 @@
 	
 	try{
 		Connection con = Util.getConnection();
-		String sql="select a.* , rownum from(select * from notice order by insert_time desc) a";
-		if(title != null)
-			sql = sql+" WHERE a.title LIKE ?";
+		String sql="select a.* , rownum from(select insert_number, writer, title, contents, to_char(insert_time,'mm/dd'),id"
+					+" from notice order by insert_time desc) a";
 		PreparedStatement pstmt = con.prepareStatement(sql);
-		if(title != null)
+		if(title != null && writer != null){
+			sql = sql+" WHERE a.title LIKE ? and a.id = ?";
+			pstmt = con.prepareStatement(sql);	
 			pstmt.setString(1, "%" + title + "%");
+			pstmt.setString(2, writer);
+		}
+		else if(title != null){
+			sql = sql+" WHERE a.title LIKE ?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, "%" + title + "%");
+		}
+		else if(writer != null){
+			sql = sql + " where a.id = ?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, writer);
+			title="";
+		}
 		else{
 			title="";
 		}
@@ -69,12 +88,12 @@
 		if(id == null){
 			id = "";
 		}
-		String user_info = "select s.name, s.id, count(*)"
-						+" from sign_in s"
-						+" where s.id = ?"
-						+" group by s.name, s.id";
+		String user_info = "select name, id"
+						+" from sign_in"
+						+" where id = ? and password = ?";
 		PreparedStatement pstmt2 = con.prepareStatement(user_info);
 		pstmt2.setString(1, id);
+		pstmt2.setString(2, pw);
 		ResultSet rs2 = pstmt2.executeQuery();	
 		boolean login_check = false;
 		if(rs2.next()){
@@ -96,43 +115,26 @@
 <div class="main">
 	<form name="notice_form" method="post">
 	<input type="text" name="id" value="<%=id %>" style="display: none;">
+	<input type="text" name="pw" value="<%=pw %>" style="display: none;">
 	<input type="text" name="notice_view_number" value="<%=view_number %>" style="display: none;">
     <div class="notice_board">
-    	<div class="notice_search">
-    		<input type="text" value="<%=title %>" placeholder="제목 검색" name="notice_name" class="notice_search_name">
-    		<input type="button" onclick="search()" name="notice_search_button" value="검색" class="notice_search_button">
-    	</div>
-        <p class="notice_title">게시판</p>
-        <%
-        if(id.length() == 0){
-        	%>
-        		<input type="button" class="notice_insert" onclick="insert_not()" value="글쓰기">
-        	<%
-        }
-        else{
-        	%>
-    			<input type="button" class="notice_insert" onclick="insert()" value="글쓰기">
-    		<%
-        }
-        %>
     	
-
-        <div class="notice_titles">
-        <span class="notice_no_title">NO.</span>
-        <span class="notice_writer_title">글쓴이</span>
-        <span class="notice_name_title">제목</span>
-        <span class="notice_time_title">시간</span>
-        </div>
+        <p class="notice_title">게시판</p>
+        
+    	
         	<ul class="notice">
         		<%
         		while(rs.next()){
-        			Integer num = Integer.parseInt(rs.getString(8));
+        			Integer num = Integer.parseInt(rs.getString(7));
         			if(printFirst <= num && printLast >= num){
         			%>
         			<li class="notice_list" onclick="notice_view(this.value)" value="<%=rs.getInt(1) %>">
-        				<span class="notice_no"><%=rs.getString(8) %></span>
+        				<span class="notice_no"><%=rs.getString(7) %></span>
+        				<span class="notice_slash">|</span>
         				<span class="notice_writer"><%=rs.getString(2) %></span>
+        				<span class="notice_slash">|</span>
         				<span class="notice_name"><%=rs.getString(3) %></span>
+        				<span class="notice_slash">|</span>
         				<span class="notice_time"><%=rs.getString(5) %></span>
         			</li>
         			<%}
@@ -154,121 +156,35 @@
     		</div>
     		<input type="button" value="다음 >" class="page_BN" onclick="page_next()">
     	</div>
+    	
+    	<div class="notice_search">
+    		<input type="text" value="<%=title %>" placeholder="제목 검색" name="notice_name" class="notice_search_name">
+    		<input type="button" onclick="search()" name="notice_search_button" value="검색" class="notice_search_button">
+    	</div>
+    	
+    	<%
+        if(id.length() == 0){
+        	%>
+        		<div style="width: 150px; height: 40px; position: absolute; display: flex; bottom: 10px; right: 20px;">
+        			<input type="button" class="notice_insert" onclick="insert_not()" value="글쓰기">
+        		</div>
+        	<%
+        }
+        else{
+        	%>
+        		<div style="width: 150px; height: 40px; position: absolute; display: flex; bottom: 10px; right: 20px;">
+    				<input type="button" class="notice_insert" onclick="insert()" value="글쓰기">
+    			</div>
+    		<%
+        }	
+        %>
     	</div>
 	</form>
-
     
-    <div class="side_menu">
-        <form name="login_form" method="post" action="login_action.jsp">
-        <input type="text" name="view_number" value="<%=view_number %>" style="display: none">
-            <div class="sign_in">
-                <%
-                if(!login_check){
-                	%>
-                	<input type="text" name="id" placeholder="아이디" value="<%=id %>" id="id">
-                	<input type="password" name="pw" placeholder="비밀번호" id="pw">
-                	<input type="button" class="login" value="로그인" onclick="login()">
-                	<p class="join" onclick="go_sign_in()">회원가입</p>
-                	<%
-                }
-                else{
-                	pstmt2 = con.prepareStatement(user_info);
-            		pstmt2.setString(1, id);
-            		rs2 = pstmt2.executeQuery();	
-                	if(rs2.next()){
-                	%>
-                	<input type="text" value="<%=id %>" name="id" style="display:none;">
-                	<div class="user_info">
-                		<p>닉네임 : <%=rs2.getString(1) %></p>
-                		<p>아이디 : <%=rs2.getString(2) %></p>
-                		<%
-                		if(notice_number > 99){
-                			%>
-                			<p>올린 글 수 : <%=notice_plus %></p>
-                			<%
-                		}
-                		else{
-                			%>
-                			<p>올린 글 수 : <%=notice_number %></p>
-                			<%
-                		}
-                		%>
-                	</div>
-                	<p class="join" onclick="home()">로그아웃</p>
-                	<%
-                	}
-                }
-                %>
-            </div>
-        </form>
-    </div>
-    
-	<%
 	
-	if(!view_number.equals("000")){
-		String notice_view = "select writer, id, title, contents, write_date, to_char(insert_time,'yyyymmdd'), to_char(insert_time, 'hh24mi') from notice where insert_number = ?";
-		PreparedStatement pstmt_view = con.prepareStatement(notice_view);
-		pstmt_view.setString(1, view_number);
-		ResultSet rs_view = pstmt_view.executeQuery();
-		
-		String notice_view_check = "select count(*) from notice, sign_in where ? = notice.id and notice.insert_number = ?";
-		PreparedStatement check_pstmt = con.prepareStatement(notice_view_check);
-		check_pstmt.setString(1, id);
-		check_pstmt.setString(2, view_number);
-		ResultSet view_check = check_pstmt.executeQuery();
-		Integer check = 0;
-		if(view_check.next()){
-			check = view_check.getInt(1);
-			if(check == null) check=0;
-		}
-		if(rs_view.next()){	
-			String notice_view_date = rs_view.getString(6);
-			notice_view_date = notice_view_date.substring(0, 4) + "년 " + notice_view_date.substring(4,6) + "월 " + notice_view_date.substring(6,8) + "일";
-			String notice_view_time = rs_view.getString(7);
-			notice_view_time = notice_view_time.substring(0,2) + ":" + notice_view_time.substring(2,4);
-		%>
-		<form action="" name="notice_view_frm" method="post">
-			<input type="text" value="<%=view_number %>" name="view_number" style="display: none;">
-			<input type="text" name="id" value="<%=id %>" style="display: none;">
-			<ul class="notice_post">
-				<li class="notice_view_title">
-					<span class="notice_view_tag">제목</span>
-					<span style="padding:0 20px;"><%=rs_view.getString(3) %></span>
-				</li>
-				<li class="notice_view_sub">
-					<a href="#">
-						<span class="notice_view_tag">글쓴이</span>
-						<span style="margin-left: 20px;"><%=rs_view.getString(1) %></span>
-					</a>
-					<a href="#" style="float: right; margin-right: 10px;">
-						<span><%=notice_view_date %></span>
-						<span><%=notice_view_time %></span>
-					</a>
-				</li>
-				<li class="notice_view_contents">
-					<span class="notice_view_tag" style="height: 466px; line-height: 466px; margin-right: 20px;">내용</span>
-					<span><%=rs_view.getString(4) %></span>
-				</li>
-				<%
-					if(check != 0){
-				%>
-					<li class="notice_view_button">
-						<input type="button" value="삭제" onclick="notice_delete()" class="notice_delete">
-						<input type="button" value="수정" onclick="notice_update()" class="notice_update">
-					</li>
-				<%
-					}
-				%>
-			</ul>
-			
-		</form>
-		<%
-		}
-	}
-	%>
 </div>
 
-
+<jsp:include page="Section/footer.jsp"></jsp:include>
 </body>
 <script type="text/javascript">
 function search() {

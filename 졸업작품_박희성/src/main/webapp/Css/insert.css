@@ -2,6 +2,8 @@
 *{
     margin: 0;
     padding: 0;
+}html{
+	background: rgb(240,240,240);
 }
 li{
     list-style: none;
@@ -14,24 +16,24 @@ li{
 .insert_area{
 	width: 1160px;
 	margin: 20px auto;
-	background: orange;
-	height: 300px;
+	height: 500px;
 	border-radius: 20px;
-	border: 3px solid black;
+	border: 2px solid black;
+	background: #A0E9FF;
 }
 .insert_area > div{
 	width: 1140px;
-	border: 1px solid black;
-	margin: 5px auto;
 	border-radius: 10px;
 }
 .title{
-	height: 50px;
-	line-height: 50px;
+	height: 100px;
+	line-height: 100px;
+	margin: 10px auto;
 }
 .contents{
-	height: 210px;
-	line-height: 210px;
+	height: 360px;
+	line-height: 360px;
+	margin: 15px auto;
 }
 .area_title{
 	font-size: 30px;
@@ -42,29 +44,43 @@ li{
 }
 .title > input{
 	width: 915px;
-	height: 30px;
+	height: 70px;
+	font-size: 40px;
+	padding-left: 10px;
+	margin-top: 15px;
+	border: 2px solid #1D5D9B;
+}
+.contents > textarea{
+	width: 915px;
+	height: 300px;
 	font-size: 20px;
 	padding-left: 10px;
-}
-.contents > input{
-	width: 915px;
-	height: 190px;
-	font-size: 18px;
-	line-height: 190px;
-	padding-left: 10px;
+	resize: none;
+	margin-top: 30px;
+	border: 2px solid #1D5D9B;
 }
 
 .input_area{
 	width: 1160px;
+	height: 100px;
 	margin: 0 auto;
 }
 .input{
 	width: 200px;
 	height: 50px;
 	line-height: 50px;
-	margin: 10px auto;
+	margin: 10px 20px;
 	text-align: center;
 	font-size: 20px;
-	font-weight: bold;
 	float: right;
+	background: #00A9FF;
+    border-radius: 5px;
+    border: none;
+    color: white;
+}
+.input_area > img{
+	width: 45px;
+	float: right;
+	margin: 10px 20px;
+	cursor: pointer;
 }

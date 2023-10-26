@@ -12,6 +12,7 @@
 <%
 request.setCharacterEncoding("UTF-8");
 String id = request.getParameter("id");
+String pw = request.getParameter("pw");
 String insert_number = request.getParameter("view_number");
 
 try{
@@ -30,22 +31,33 @@ try{
 
 	<form action="notice_update_action.jsp" name="frm" method="post" style="display: flex; justify-content: center; align-items: center;">
 	<input type="text" name="id" value="<%=id %>" style="display: none;">
+	<input type="text" name="pw" value="<%=pw %>" style="display: none;">
 	<input type="text" name="insert_number" value="<%=insert_number %>" style="display: none;">
 	<div class="main">
 		<div class="insert_area">
-			<div class="title">
-				<span class="area_title">제목</span>
-				<input type="text" name="title">
-			</div>
-			<div class="contents">
-				<span class="area_title">내용</span>
-				<input type="text" name="contents">
-			</div>
+			<%
+			if(rs.next()){
+				%>
+				<div class="title">
+					<span class="area_title">제목</span>
+					<input type="text" name="title" value="<%=rs.getString(1) %>">
+				</div>
+				<div class="contents">
+					<span class="area_title">내용</span>
+					<textarea rows="" cols="" name="contents"><%=rs.getString(2) %></textarea>
+				</div>
+				<%
+			}
+			%>
 		</div>
-		<div class="input_area"><input type="button" onclick="notice_update_action()" value="글 수정하기" class="input"></div>
+		<div class="input_area">
+			<img src="Image/turn_icon.png" onclick="back()">
+			<input type="button" onclick="notice_update_action()" value="글 수정하기" class="input">
+		</div>
 	</div>
 	</form>
 
+<jsp:include page="Section/footer.jsp"></jsp:include>
 </body>
 <%}
 catch(Exception e){

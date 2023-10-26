@@ -4,37 +4,36 @@
     margin: 0;
     padding: 0;
 }
+html{
+	background: rgb(240,240,240);
+}
 li{
     list-style: none;
-}
-html{
-	background: #FFCA7F;
 }
 .main{
     width: 1200px;
     margin: 0 auto;
 }
 .notice_board{
-	float: left;
-    width: 820px;
-    height: 420px;
-    background: #FF9500;
-    margin: 20px 16px 16px 20px;
+    width: 1200px;
+    height: 520px;
+    margin: 50px auto;
     border-radius: 20px;
     border: 2px solid black;
+    background: #CDF5FD;
+    position: relative;
 }
 .notice_search{
-	width: 160px;
+	width: 189px;
 	height: 40px;
-	float: left;
-	margin-left: 20px;
-	margin-top: 10px;
-	margin-right : 20px;
+	position: absolute;
+	bottom: 10px;
+	left: 20px;
 	display: flex;
 }
 .notice_search_name{
 	height: 36px;
-	width: 91px;
+	width: 120px;
 	margin-right: 5px;
 	text-align: center;
 }
@@ -49,112 +48,55 @@ html{
     width: 420px;
     height: 50px;
     line-height: 50px;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: bold;
     text-align: center;
-    float: left;
-    margin-top: 5px;
+    margin: 25px auto 0 auto;
 }
 .notice_insert{
 	width: 150px;
 	height: 40px;
-	margin: 10px 20px;
-	float: right;
 	font-size: 20px;
 	font-weight: bold;
+	bottom:10px;
+	right: 10px;
 }
-
-.notice_titles{
-	width: 780px;
-	height: 40px;
-	margin: 0 20px;
-	float: left;
-	position:relative;
-	align-content: space-between;
-}
-.notice_titles > span{
-	float: left;
-	line-height: 40px;
-}
-.notice_no_title{
-	text-align: center;
-	width: 70px;
-	height: 40px;
-	font-size: 20px;
-	font-weight: bold;
-	padding: 0 5px;
-	margin: 0 10px;
-}
-.notice_writer_title{
-	text-align: center;
-	width: 100px;
-	height: 40px;
-	font-size: 20px;
-	font-weight: bold;
-	padding: 0 5px;
-	margin: 0 5	px;
-}
-.notice_name_title{
-	text-align: center;
-	width: 415px;
-	height: 40px;
-	font-size: 20px;
-	font-weight: bold;
-	padding: 0 5px;
-	margin: 0 10px;
-}
-.notice_time_title{
-	text-align: center;
-	width: 100px;
-	height: 40px;
-	font-size: 20px;
-	font-weight: bold;
-	padding: 0 5px;
-	margin:0 5px;
-}
-
 
 
 .notice{
 	align-items: center;
-	width: 780px;
-	height: 270px;
-	margin: 10px 20px 10px 20px;
+	width: 1180px;
+	height: 470px;
+	margin: 20px 20px 10px 20px;
 	border-collapse: separate;
 	border-spacing: 10px;
 	position: relative;
 	overflow: auto;
-	border: 1px solid black;
 }
 .notice_list{
-	width: 780px;
-	height: 40px;
+	width: 1160px;
+	height: 39px;
 	line-height: 20px;
 	font-size: 18px;
-	margin:6.8px 0;
+	margin:15px 0;
 	float: left;
+	border-bottom: 1px dashed gray;
+	cursor: pointer;
+}
+.notice_slash{
+	margin: 0 auto;
+	color: gray;
+	width: 10px;
+	text-align: center;
 }
 .notice_list:hover{
 	font-weight: bold;
-	color: white;
 }
 .notice_list > span{
-	border: 1px solid black;
 	float: left;
-	margin: 0 5px;
 	line-height: 40px;
 }
 .notice_no{
-	width: 70px;
-	height: 40px;
-	padding: 0 5px;
-	text-align: center;
-	font-size: 18px;
-	text-overflow:ellipsis;
-	white-space: nowrap;
-	max-width: 70px;
-}
-.notice_writer{
 	width: 100px;
 	height: 40px;
 	padding: 0 5px;
@@ -163,16 +105,26 @@ html{
 	text-overflow:ellipsis;
 	white-space: nowrap;
 	max-width: 100px;
+}
+.notice_writer{
+	width: 120px;
+	height: 40px;
+	padding: 0 5px;
+	text-align: center;
+	font-size: 18px;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	max-width: 120px;
 	overflow: hidden;
 }
 .notice_name{
 	padding: 0 10px;
 	font-size: 18px;
-	width: 410px;
+	width: 760px;
 	height: 40px;
 	text-overflow:ellipsis;
 	white-space: nowrap;
-	max-width: 410px;
+	max-width: 760px;
 	overflow: hidden;
 }
 .notice_time{
@@ -185,11 +137,14 @@ html{
 }
 
 .notice_page{
-	width: 820px;
+	width: 100%;
 	display: flex;
 	text-align: center;
 	justify-content: center;
 	align-items: center;
+	position: absolute;
+	bottom: 10px;
+	margin: 0 auto;
 }
 .page_button{
 	width: 30px;
@@ -200,110 +155,3 @@ html{
 	height: 30px;
 }
 
-
-
-
-
-.side_menu{
-    margin: 20px 20px 16px 16px;
-	width: 300px;
-	height : 420px;
-	background: rgb(188,188,188);
-    float: right;
-    border-radius: 20px;
-    border: 2px solid black;
-    position: relative;
-}
-
-.sign_in{
-    float: right;
-    height: 90px;
-    width: 270px;
-    margin: 15px;
-}
-#id, #pw{
-    width: 260px;
-    height: 30px;
-    border-radius: 10px;
-    border: 1px solid black;
-    margin: 5px auto;
-    padding: 0 5px;
-}
-.login{
-    width: 270px;
-    height: 40px;
-    font-size: 20px;
-    font-weight:bold;
-    border-radius: 15px;
-}
-.join{
-	text-align: right;
-	margin-top: 5px;
-	font-size: 18px;
-	position: absolute;
-	bottom: 10px;
-	right: 20px;
-}
-
-.notice_post{
-	width: 1160px;
-	height: 600px;
-	background-color: #66F981;
-	margin: 16px 18px 20px 18px;
-	float: left;
-	border-radius: 20px;
-	position: relative;
-	border: 2px solid black;
-}
-.notice_view_title{
-	width: 100%;
-	height: 100px;
-	line-height:100px;
-	font-size: 30px;
-	font-weight: bold;
-	text-align: center;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-}
-.notice_view_sub{
-	width: 100%;
-	height: 30px;
-	line-height: 30px;
-	font-size: 15px;
-	border-bottom: 2px solid black;
-	border-top: 2px solid black;
-}
-.notice_view_contents{
-	width: 100%;
-	height: 460px;
-	font-size: 25px;
-}
-.notice_view_tag{
-	width: 80px;
-	float: left;
-	border-right: 2px solid black;
-	text-align: center;
-}
-.notice_view_button{
-	position: absolute;
-	right: 10px;
-	bottom: 10px;
-}
-.notice_delete{
-	width: 100px;
-	height: 40px;
-	line-height: 40px;
-	background: #FF001A;
-	color: white;
-	font-size: 20px;
-	margin-right: 10px;
-}
-.notice_update{
-	width: 100px;
-	height: 40px;
-	line-height: 40px;
-	font-size: 20px;
-	background: rgb(214,230,245);
-	margin-right: 10px;
-}

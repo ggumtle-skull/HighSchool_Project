@@ -1,3 +1,4 @@
+<%@page import="java.io.PrintWriter"%>
 <%@page import="DBPKG.Util"%>
 <%@page import="java.sql.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -28,7 +29,9 @@ try{
 	}
 	else{
 		%>
-		<jsp:forward page="sign_in.jsp"></jsp:forward>
+		<jsp:forward page="login.jsp">
+			<jsp:param value="true" name="doplication"/>
+		</jsp:forward>
 		<%	
 	}
 	
