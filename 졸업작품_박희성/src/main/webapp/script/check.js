@@ -126,4 +126,12 @@ function notice_delete(){
 function search_writer(){
 	frm.action = "index.jsp";
 	document.frm.submit();
+	return true;
+}
+function search_reset(){
+	notice_form.action="index.jsp";
+	notice_form.notice_name.value="";
+	notice_form.writer.value="";
+	notice_form.submit();
+	return true;
 }

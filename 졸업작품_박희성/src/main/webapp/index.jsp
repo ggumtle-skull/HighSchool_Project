@@ -21,13 +21,12 @@
 	String pw = request.getParameter("pw");
 	String title = request.getParameter("notice_name");
 	String writer = request.getParameter("writer");
+	if(title == null) title="";
+	if(writer == null) writer ="";
 	String view_number = request.getParameter("notice_view_number");
 	Integer notice_number = 0;
 	if(view_number == null || view_number == "null")
 		view_number = "000";
-	
-	System.out.println(title);
-	System.out.println(writer);
 	
 	String tempPage = request.getParameter("page");
 	Integer cPage;
@@ -44,7 +43,7 @@
 	Integer printLast = printFirst + perForPage -1 ;
 	Integer totalList = 0;
 	Integer totalPage = 0;
-	Integer pageList = (cPage-1) / 10 + 1;
+	Integer pageList = (cPage-1) / 5 + 1;
 	
 	try{
 		Connection con = Util.getConnection();
@@ -52,10 +51,10 @@
 					+" from notice order by insert_time desc) a";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		if(title != null && writer != null){
-			sql = sql+" WHERE a.title LIKE ? and a.id = ?";
+			sql = sql+" WHERE a.title LIKE ? and a.id like ?";
 			pstmt = con.prepareStatement(sql);	
 			pstmt.setString(1, "%" + title + "%");
-			pstmt.setString(2, writer);
+			pstmt.setString(2, "%" + writer + "%");
 		}
 		else if(title != null){
 			sql = sql+" WHERE a.title LIKE ?";
@@ -82,7 +81,7 @@
 			cPage = 1;
 			printFirst = (cPage - 1)*5 + 1;
 			printLast = printFirst + perForPage -1 ;
-			pageList = (cPage-1) / 10 + 1;
+			pageList = (cPage-1) / 5 + 1;
 		}
 
 		if(id == null){
@@ -145,8 +144,8 @@
         <div class="notice_page">
     		<input name="page" value="<%=cPage %>" style="display: none;" type="text">
     		<input type="button" value="< 이전" class="page_BN" onclick="page_before()"><div style="margin-left: 10px; margin-right: 10px;">
-    		<% Integer num2 = (pageList-1)*10 + 1;
-    			while(num2 <= pageList*10 && num2 <= totalPage){%>
+    		<% Integer num2 = (pageList-1)*5 + 1;
+    			while(num2 <= pageList*5 && num2 <= totalPage){%>
     			<input type="button" value="<%=num2 %>" onclick="pageNum(this.value)" class="page_button"
     			<% if(num2 == cPage) {%>
     			style="background: gray; color: white;"
@@ -159,7 +158,13 @@
     	
     	<div class="notice_search">
     		<input type="text" value="<%=title %>" placeholder="제목 검색" name="notice_name" class="notice_search_name">
+    		<input type="text" value="<%=writer %>" name="writer" style="display: none;">
     		<input type="button" onclick="search()" name="notice_search_button" value="검색" class="notice_search_button">
+    		<%
+    		if(title != "" || writer != ""){
+    		%>
+    		<img src="Image/reset_icon.png" onclick="search_reset()">
+    		<%} %>
     	</div>
     	
     	<%

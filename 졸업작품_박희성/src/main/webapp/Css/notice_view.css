@@ -1,15 +1,11 @@
 @charset "UTF-8";
-html{
-	background: rgb(240,240,240);
-}
 .notice_post{
 	width: 1160px;
 	height: 500px;
 	float: left;
 	border-radius: 20px;
 	position: relative;
-	border: 2px solid black;
-	background: #A0E9FF;
+	background: #CDF5FD;
 	margin-top: 50px;
 }
 .notice_view_title{
@@ -28,8 +24,8 @@ html{
 	height: 30px;
 	line-height: 30px;
 	font-size: 15px;
-	border-bottom: 2px solid black;
-	border-top: 2px solid black;
+	border-bottom: 2px solid white;
+	border-top: 2px solid white;
 }
 .notice_view_contents{
 	width: 100%;
@@ -49,7 +45,7 @@ html{
 .notice_view_tag{
 	width: 80px;
 	float: left;
-	border-right: 2px solid black;
+	border-right: 2px solid white;
 	text-align: center;
 }
 .notice_view_button{

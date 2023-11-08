@@ -2,8 +2,6 @@
 *{
     margin: 0;
     padding: 0;
-}html{
-	background: rgb(240,240,240);
 }
 li{
     list-style: none;
@@ -15,11 +13,11 @@ li{
 
 .insert_area{
 	width: 1160px;
-	margin: 20px auto;
+	margin: 30px auto;
 	height: 500px;
 	border-radius: 20px;
-	border: 2px solid black;
-	background: #A0E9FF;
+	background: #CDF5FD;
+	opacity: 0.8;
 }
 .insert_area > div{
 	width: 1140px;

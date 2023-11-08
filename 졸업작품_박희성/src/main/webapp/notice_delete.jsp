@@ -5,6 +5,7 @@
 <%
 request.setCharacterEncoding("UTF-8");
 String id = request.getParameter("id");
+String pw = request.getParameter("pw");
 String view_number = request.getParameter("view_number");
 
 try{
@@ -16,6 +17,9 @@ try{
 	%>
 	<jsp:include page="index.jsp">
 		<jsp:param value="<%=id %>" name="id"/>
+		<jsp:param value="<%=pw %>" name="pw"/>
+		<jsp:param value="" name="title"/>
+		<jsp:param value="" name="writer"/>
 	</jsp:include>
 	<%
 }

@@ -27,7 +27,7 @@ try{
 %>
 <body>
 <jsp:include page="Section/header.jsp"></jsp:include>
-<form action="" name="frm" style="display: flex; justify-content: center; align-items: center;">
+<form action="" method="post" name="frm" style="display: flex; justify-content: center; align-items: center;">
 <%
 		String notice_view = "select writer, id, title, contents, write_date, to_char(insert_time,'yyyymmdd'), to_char(insert_time, 'hh24mi') from notice where insert_number = ?";
 		PreparedStatement pstmt_view = con.prepareStatement(notice_view);
